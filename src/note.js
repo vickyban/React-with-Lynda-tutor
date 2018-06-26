@@ -19,18 +19,20 @@ class Note extends Component{
        this.setState( {editting: true} )
     }
     remove(){
-        alert("remove");
+        this.props.onRemove(this.props.index)
     }
-    save(){
-        alert(this.newText.value)
+    save(e){
+        e.preventDefault()
+        this.props.onChange(this._newText.value, this.props.index)
+        this.setState( {editting: false} )
     }
 
     renderForm(){
         return(
             <div>
-                <form>
-                    <textarea ref={input => this.newText = input}/>
-                    <button onClick={this.save}><FaFloppyO/></button>
+                <form onSubmit={this.save}>
+                    <textarea ref={input => this._newText = input}/>
+                    <button ><FaFloppyO/></button>
                 </form>
             </div>
         )
